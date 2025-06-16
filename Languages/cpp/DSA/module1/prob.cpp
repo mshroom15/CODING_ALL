@@ -5,12 +5,12 @@ using namespace std;
 using namespace std::chrono;
 
 int main() {
-    int n = 20,sum=0;
+    int n = 40,sum=0;
     
     auto start = high_resolution_clock::now();
 
     for(int i=0; i<n; i++){
-        sum += i;
+        cout << i << endl;
     }
 
     auto stop = high_resolution_clock::now();
