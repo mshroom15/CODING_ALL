@@ -5,7 +5,7 @@ class Account{
     int acn;
     int amount;
     void setamount(int a){
-        amount = a;1q
+        amount = a;
     }
 
 };

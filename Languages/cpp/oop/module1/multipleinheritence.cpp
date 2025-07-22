@@ -18,6 +18,6 @@ int main(){
      C class;
      class.display1();
      class.display2();
-     return 0;dxd
+     return 0;
 
 }
