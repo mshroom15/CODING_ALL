@@ -9,13 +9,28 @@ int main(){
         long long a,b;
         
         cin>>a>>b;
-
-        for(int i=1;i<=b;i++){
-            if(a%2==0){
-                a-=i;}
-                else a+=i;
+        if(a%2!=0){
+            long long rem = b % 4;
+            if (rem == 1) {
+                a += b;
+            } else if (rem == 2) {
+                a -= 1;
+            } else if (rem == 3) {
+                a = a - b - 1;
+            }
+            cout << a << endl;
         }
-        cout<<a<<endl;
+        else{
+            long long rem = b % 4;
+            if (rem == 1) {
+                a -= b;
+            } else if (rem == 2) {
+                a += 1;
+            } else if (rem == 3) {
+                a = a + b + 1;
+            }
+            cout << a << endl;
+        }
     }
     return 0;
 }

@@ -1,13 +1,36 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
 
-int main(){
+
+using namespace std;
+int main() {
     int t;
-    cin>>t;
-    for(int i=0;i<t;i++){
-        int n=0;
-        cin>>n;
-        int a[n];
-        cin>>a;
+    cin >> t;
+    while (t--) {
+        int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
     }
+    
+    sort(a.begin(), a.end());
+    
+    bool possible = true;
+    for (int i = 0; i < n - 1; ++i) {
+        if (a[i+1] - a[i] > 1) {
+            possible = false;
+            break;
+        }
+    }
+    
+    if (possible) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
+    }
+    }
+    return 0;
 }

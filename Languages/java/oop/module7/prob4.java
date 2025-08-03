@@ -2,7 +2,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Prob4 {
+public class prob4 {
     public static void main(String[] args) {
         int a[]= new int[10];
         Scanner sc = new Scanner(System.in);

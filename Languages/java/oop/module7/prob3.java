@@ -14,5 +14,6 @@ public class prob3 {
         } else {
             System.out.println(a +" is equal to "+b);
         }
+        sc.close();
     }
 }
