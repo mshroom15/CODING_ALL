@@ -1,22 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 template <typename T>
-class vector{
+class Vector{
     private:
         T *arr;
-        T capacity;
-        T size;
+        size_t capacity;
+        size_t size;
     public:
-        vector(T cap = 10) : capacity(cap), size(0) {
+        Vector(size_t cap = 10) : capacity(cap), size(0) {
             arr = new T[capacity];
         }
-        ~vector() {
+        ~Vector() {
             delete[] arr;
         }
         void push_back(T val) {
             if (size == capacity) {
                 T *newArr = new T[capacity * 2];
-                for (T i = 0; i < size; i++) {
+                for (size_t i = 0; i < size; i++) {
                     newArr[i] = arr[i];
                 }
                 delete[] arr;
@@ -42,14 +42,14 @@ class vector{
         void push_front(T val) {
             if (size == capacity) {
                 T *newArr = new T[capacity * 2];
-                for (T i = 0; i < size; i++) {
+                for (size_t i = 0; i < size; i++) {
                     newArr[i + 1] = arr[i];
                 }
                 delete[] arr;
                 arr = newArr;
                 capacity *= 2;
             } else {
-                for (T i = size; i > 0; i--) {
+                for (size_t i = size; i > 0; i--) {
                     arr[i] = arr[i - 1];
                 }
             }
@@ -58,7 +58,7 @@ class vector{
         }
         void pop_front() {
             if (size > 0) {
-                for (T i = 0; i < size - 1; i++) {
+                for (size_t i = 0; i < size - 1; i++) {
                     arr[i] = arr[i + 1];
                 }
                 size--;
@@ -66,48 +66,48 @@ class vector{
                 throw runtime_error("Vector is empty");
             }
         }
-        Begin() {
+        T* Begin() {
             return arr;
         }
-        End() {
+        T* End() {
             return arr + size;
         }
-        void insert(T index, T val) {
-            if (index < 0 || index > size) {
+        void insert(size_t index, T val) {
+            if (index > size) {
                 throw out_of_range("Index out of range");
             }
             if (size == capacity) {
                 T *newArr = new T[capacity * 2];
-                for (T i = 0; i < index; i++) {
+                for (size_t i = 0; i < index; i++) {
                     newArr[i] = arr[i];
                 }
                 newArr[index] = val;
-                for (T i = index; i < size; i++) {
+                for (size_t i = index; i < size; i++) {
                     newArr[i + 1] = arr[i];
                 }
                 delete[] arr;
                 arr = newArr;
                 capacity *= 2;
             } else {
-                for (T i = size; i > index; i--) {
+                for (size_t i = size; i > index; i--) {
                     arr[i] = arr[i - 1];
                 }
                 arr[index] = val;
             }
             size++;
         }
-        void erase(T index) {
-            if (index < 0 || index >= size) {
+        void erase(size_t index) {
+            if (index >= size) {
                 throw out_of_range("Index out of range");
             }
-            for (T i = index; i < size - 1; i++) {
+            for (size_t i = index; i < size - 1; i++) {
                 arr[i] = arr[i + 1];
             }
             size--;
         }
 };
 int main(){
-    vector<int> v;
+    Vector<int> v;
     while (true) {
         cout << "****** Vector Operations ******" << endl;
         int choice;

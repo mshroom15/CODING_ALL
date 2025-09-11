@@ -1,124 +1,435 @@
 #include <iostream>
 using namespace std;
-
 class Father {
 private:
-    int money;
+int money = 1000;
 protected:
-    int gold;
+int gold = 500;
 public:
-    int land;
-    
-    Father() {
-        money = 1000;
-        gold = 100;
-        land = 10;
-    }
-    
-    int getMoney() {
-        return money;
-    }
-};
-
-// Case 1: public inheritance
-class Son1 : public Father {
-public:
-    void accessMembers() {
-        // money is not accessible (private in Father)
-        // cout << "Money: " << money << endl;  // Error
-        cout << "Gold: " << gold << endl;    // Accessible (protected in Father)
-        cout << "Land: " << land << endl;    // Accessible (public in Father)
-        cout << "Money (via getter): " << getMoney() << endl;  // Accessible via public method
-    }
-};
-
-class GrandSon1 : public Son1 {
-public:
-    void accessMembers() {
-        // money is not accessible (private in Father)
-        // cout << "Money: " << money << endl;  // Error
-        cout << "Gold: " << gold << endl;    // Accessible (protected in Father -> Son1)
-        cout << "Land: " << land << endl;    // Accessible (public in Father -> Son1)
-        cout << "Money (via getter): " << getMoney() << endl;  // Accessible via public method
-        
-        cout << "Sum: " << getMoney() + gold + land << endl;
-    }
-};
-
-// Case 2: protected inheritance
-class Son2 : protected Father {
-public:
-    void accessMembers() {
-        // money is not accessible (private in Father)
-        // cout << "Money: " << money << endl;  // Error
-        cout << "Gold: " << gold << endl;    // Accessible (protected in Father)
-        cout << "Land: " << land << endl;    // Accessible (public in Father becomes protected in Son)
-        cout << "Money (via getter): " << getMoney() << endl;  // Accessible via public method
-    }
-};
-
-class GrandSon2 : public Son2 {
-public:
-    void accessMembers() {
-        // money is not accessible (private in Father)
-        // cout << "Money: " << money << endl;  // Error
-        cout << "Gold: " << gold << endl;    // Accessible (protected in Father -> Son2)
-        cout << "Land: " << land << endl;    // Accessible (public in Father becomes protected in Son2)
-        cout << "Money (via getter): " << getMoney() << endl;  // Accessible via public method
-        
-        cout << "Sum: " << getMoney() + gold + land << endl;
-    }
-};
-
-// Case 3: private inheritance
-class Son3 : private Father {
-public:
-    void accessMembers() {
-        // money is not accessible (private in Father)
-        // cout << "Money: " << money << endl;  // Error
-        cout << "Gold: " << gold << endl;    // Accessible (protected in Father)
-        cout << "Land: " << land << endl;    // Accessible (public in Father becomes private in Son)
-        cout << "Money (via getter): " << getMoney() << endl;  // Accessible via public method
-    }
-    
-    // Expose methods to access inherited members
-    int getSonLand() { return land; }
-    int getSonGold() { return gold; }
-    int getSonMoney() { return getMoney(); }
-};
-
-class GrandSon3 : public Son3 {
-public:
-    void accessMembers() {
-        // All Father members are inaccessible directly because they became private in Son3
-        // cout << "Gold: " << gold << endl;  // Error
-        // cout << "Land: " << land << endl;  // Error
-        // cout << "Money: " << getMoney() << endl;  // Error
-        
-        // But we can access them through Son3's public methods
-        cout << "Gold (via Son): " << getSonGold() << endl;
-        cout << "Land (via Son): " << getSonLand() << endl;
-        cout << "Money (via Son): " << getSonMoney() << endl;
-        
-        cout << "Sum: " << getSonMoney() + getSonGold() + getSonLand() << endl;
-    }
-};
-
-int main() {
-    cout << "Inheritance Table Demonstration:" << endl;
-    cout << "================================" << endl;
-    
-    cout << "\nCase 1: Son (public) -> GrandSon (public)" << endl;
-    GrandSon1 gs1;
-    gs1.accessMembers();
-    
-    cout << "\nCase 2: Son (protected) -> GrandSon (public)" << endl;
-    GrandSon2 gs2;
-    gs2.accessMembers();
-    
-    cout << "\nCase 3: Son (private) -> GrandSon (public)" << endl;
-    GrandSon3 gs3;
-    gs3.accessMembers();
-    
-    return 0;
+int land = 300;
+int getMoney() {
+return money;
 }
+};
+class Son : public Father {
+public:
+void showAccessFromSon() {
+// cout << "Money: " << money << endl; //Not accessible
+cout << "Gold (from Son): " << gold << endl; //Accessible
+cout << "Land (from Son): " << land << endl; //Accessible
+}
+};
+class GrandSon : public Son {
+public:
+void showAccessFromGrandSon() {
+// cout << "Money: " << money << endl; //Not accessible
+cout << "Gold (from GrandSon): " << gold << endl; //Accessible
+cout << "Land (from GrandSon): " << land << endl; //Accessible
+}
+void displaySum() {
+int total = getMoney() + gold + land;
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+Son s;
+cout << "--- Access from Son ---" << endl;
+s.showAccessFromSon();
+GrandSon g;
+cout << "--- Access from GrandSon ---" << endl;
+g.showAccessFromGrandSon();
+cout << "--- Sum Displayed in GrandSon ---" << endl;
+g.displaySum();
+return 0;
+}
+/*
+Case 02:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : protected Father {
+public:
+void showAccessFromSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from Son): " << gold << endl; //Accessible
+cout << "Land (from Son): " << land << endl; //Accessible
+}
+};
+class GrandSon : public Son {
+public:
+void showAccessFromGrandSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from GrandSon): " << gold << endl; // Accessible
+// cout << "Land (from GrandSon): " << land << endl; // Not
+accessible
+}
+void displaySum() {
+int total = getMoney() + gold + 0; // land not accessible
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration ---\n";
+Son s;
+// s.showAccessFromSon(); // Cannot access showAccessFromSon()
+because Son inherited Father as protected
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 03:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : private Father {
+public:
+int getGold() { return gold; }
+int getLand() { return land; }
+int getMoneyFromFather() { return getMoney(); }
+void showAccessFromSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from Son): " << gold << endl; // Accessible
+cout << "Land (from Son): " << land << endl; // Accessible
+}
+};
+class GrandSon : public Son {
+public:
+void showAccessFromGrandSon() {
+// cout << gold << endl; // Not accessible directly
+cout << "Gold (from GrandSon via getter): " << getGold() << endl;
+cout << "Land (from GrandSon via getter): " << getLand() << endl;
+}
+void displaySum() {
+int total = getMoneyFromFather() + getGold() + getLand();
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration---\n";
+Son s;
+s.showAccessFromSon();
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 04:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : public Father {
+public:
+void showAccessFromSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from Son): " << gold << endl; // Accessible
+cout << "Land (from Son): " << land << endl; // Accessible
+}
+};
+class GrandSon : protected Son {
+public:
+void showAccessFromGrandSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from GrandSon): " << gold << endl; // Accessible
+cout << "Land (from GrandSon): " << land << endl; // Accessible
+}
+void displaySum() {
+int total = getMoney() + gold + land;
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration---\n";
+Son s;
+s.showAccessFromSon();
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 05:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : protected Father {
+public:
+void showAccessFromSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from Son): " << gold << endl; // Accessible
+cout << "Land (from Son): " << land << endl; // Accessible
+}
+};
+class GrandSon : protected Son {
+public:
+void showAccessFromGrandSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from GrandSon): " << gold << endl; //
+Accessible (as protected)
+// cout << land << endl; // Not accessible
+}
+void displaySum() {
+int total = getMoney() + gold + 0; // land inaccessible
+directly
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration ---\n";
+Son s;
+// s.showAccessFromSon(); // Not accessible, Son is protectedly
+inherited
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 06:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : private Father {
+public:
+int getGold() { return gold; }
+int getLand() { return land; }
+int getMoneyFromFather() { return getMoney(); }
+void showAccessFromSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from Son): " << gold << endl; // Accessible
+cout << "Land (from Son): " << land << endl; // Accessible
+}
+};
+class GrandSon : protected Son {
+public:
+void showAccessFromGrandSon() {
+// cout << gold << endl; // Not accessible directly
+cout << "Gold (from GrandSon via getter): " << getGold() << endl;
+cout << "Land (from GrandSon via getter): " << getLand() << endl;
+}
+void displaySum() {
+int total = getMoneyFromFather() + getGold() + getLand();
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration ---\n";
+Son s;
+s.showAccessFromSon();
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 07:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : public Father {
+public:
+void showAccessFromSon() {
+// cout << money << endl; //Not accessible
+cout << "Gold (from Son): " << gold << endl; //Accessible
+cout << "Land (from Son): " << land << endl; //Accessible
+}
+};
+class GrandSon : private Son {
+public:
+void showAccessFromGrandSon() {
+// cout << money << endl; //Not accessible
+cout << "Gold (from GrandSon): " << gold << endl; //Accessible
+cout << "Land (from GrandSon): " << land << endl; //Accessible
+}
+void displaySum() {
+int total = getMoney() + gold + land;
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration ---\n";
+Son s;
+s.showAccessFromSon();
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 08:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : protected Father {
+public:
+void showAccessFromSon() {
+// cout << money << endl; //Not accessible
+cout << "Gold (from Son): " << gold << endl; //Accessible
+cout << "Land (from Son): " << land << endl; //Accessible
+}
+};
+class GrandSon : private Son {
+public:
+void showAccessFromGrandSon() {
+// cout << gold << endl; //Not directly accessible
+cout << "Gold (from GrandSon): " << gold << endl; //Accessible
+cout << "Land (from GrandSon): " << land << endl; //Accessible }
+void displaySum() {
+int total = getMoney() + gold + land;
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration ---\n";
+Son s;
+s.showAccessFromSon();
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 09:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : private Father {
+public:
+int getGold() { return gold; }
+int getLand() { return land; }
+int getMoneyFromFather() { return getMoney(); }
+void showAccessFromSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from Son): " << gold << endl; // Accessible
+cout << "Land (from Son): " << land << endl; // Accessible
+}
+};
+class GrandSon : private Son {
+public:
+void showAccessFromGrandSon() {
+// cout << gold << endl; // Not accessible directly
+cout << "Gold (from GrandSon via getter): " << getGold() <<
+endl;
+cout << "Land (from GrandSon via getter): " << getLand() <<
+endl;
+}
+void displaySum() {
+int total = getMoneyFromFather() + getGold() + getLand();
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration ---\n";
+Son s;
+s.showAccessFromSon();
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+Case 10:
+#include <iostream>
+using namespace std;
+class Father {
+private:
+int money = 1000;
+protected:
+int gold = 500;
+public:
+int land = 300;
+int getMoney() { return money; }
+};
+class Son : private Father {
+public:
+int getGold() { return gold; }
+int getLand() { return land; }
+int getMoneyFromFather() { return getMoney(); }
+void showAccessFromSon() {
+// cout << money << endl; // Not accessible
+cout << "Gold (from Son): " << gold << endl; // Accessible
+cout << "Land (from Son): " << land << endl; // Accessible
+}
+};
+class GrandSon : private Son {
+public:
+void showAccessFromGrandSon() {
+// cout << gold << endl; // Not accessible directly
+cout << "Gold (from GrandSon via getter): " << getGold() <<
+endl;
+cout << "Land (from GrandSon via getter): " << getLand() <<
+endl;
+}
+void displaySum() {
+int total = getMoneyFromFather() + getGold() + getLand();
+cout << "Total (Money + Gold + Land): " << total << endl;
+}
+};
+int main() {
+cout << "--- Son and GrandSon Access Demonstration ---\n";
+Son s;
+s.showAccessFromSon();
+GrandSon g;
+g.showAccessFromGrandSon();
+g.displaySum();
+return 0;
+}
+*/

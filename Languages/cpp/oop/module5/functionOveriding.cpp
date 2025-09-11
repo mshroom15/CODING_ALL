@@ -15,9 +15,9 @@ void print() {
 int main() {
     A a;
     B b;
-    A* ptr = &b; // Pointer of type A pointing to an object of type B
-    a.print();   // Calls A's print
-    b.print();   // Calls B's print
-    ptr->print(); // Calls B's print due to polymorphism
+    A* ptr = &b;
+    a.print();
+    b.print();
+    ptr->print();
     return 0;
 }

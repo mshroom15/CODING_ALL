@@ -16,7 +16,7 @@ int main() {
         
         cout << "ax[" << i << "]=" << ax[i] << endl;
     }
-    catch (int index) {5
+    catch (int index) {
         cout << "Negative index error: " << index << endl;
     }
     catch (string msg) {

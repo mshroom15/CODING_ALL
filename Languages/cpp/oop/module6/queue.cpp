@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 template <typename T>
-class queue {
+class Queue {
 private:
     vector<T> arr;
     int front_idx;
@@ -9,7 +9,7 @@ private:
     int size;
     
 public:
-    queue() : front_idx(0), rear_idx(-1), size(0) {}
+    Queue() : front_idx(0), rear_idx(-1), size(0) {}
     
     void enqueue(T val) {
         arr.push_back(val);
@@ -25,7 +25,6 @@ public:
         front_idx++;
         size--;
         
-        // Reset indices and resize vector when queue becomes empty
         if (isEmpty()) {
             arr.clear();
             front_idx = 0;
@@ -51,7 +50,7 @@ public:
     }
 };
 int main(){
-    queue<int> q;
+    Queue<int> q;
     while (true) {
         cout << "****** Queue Operations ******" << endl;
         int choice;

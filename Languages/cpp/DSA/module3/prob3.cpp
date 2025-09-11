@@ -8,7 +8,7 @@ int main() {
         cin >> a[i];
     }
     sort(a.begin(),a.end());
-    cout<<"number yuo want to find:"<<endl;
+    cout<<"number you want to find:"<<endl;
     cin>>m;
     bool found=false;
     int ub=n,lb=0;

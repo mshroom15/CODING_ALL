@@ -15,8 +15,7 @@ class PrivateTest {
 
 public class privatemethod {
     public static void main(String[] args) {
-        PrivateTest obj = new PrivateTest(100);
-        // obj.printData(); 
+        PrivateTest obj = new PrivateTest(100); 
         obj.showData();
     }
 }

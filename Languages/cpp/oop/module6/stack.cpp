@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 template <typename T>
-class stack{
+class MyStack{
 private:
     vector<T> v;
 public:
-    stack() {}
+    MyStack() {}
     void push(T data) {
         v.push_back(data);
     }
@@ -41,7 +41,7 @@ public:
     }
 };
 int main() {
-    stack<int> s;
+    MyStack<int> s;
     while(true){
         cout << "****** Stack Operations ******" << endl;
         int choice;

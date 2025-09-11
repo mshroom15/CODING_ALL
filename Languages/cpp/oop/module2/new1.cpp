@@ -4,8 +4,8 @@ class bank{
      int acn;
      float balance;
      static int total;
-     static int maxAcn; // Account with highest balance
-     static float maxBalance; // Highest balance value
+     static int maxacn;
+     static float maxbalance;
      public:
      bank(){
           acn=0;
@@ -40,24 +40,24 @@ class bank{
           updateMax();
      }
      void updateMax(){
-          if(balance > maxBalance){
-               maxBalance = balance;
-               maxAcn = acn;
+          if(balance > maxbalance){
+               maxbalance = balance;
+               maxacn = acn;
           }
      }
      static void showHighestBalance(){
-          cout << "Account with highest balance: " << maxAcn 
-               << " with balance: " << maxBalance << endl;
+          cout << "Account with highest balance: " << maxacn 
+               << " with balance: " << maxbalance << endl;
      }
 };
 int bank::total=0;
-int bank::maxAcn=0;
-float bank::maxBalance=0.0;
+int bank::maxacn=0;
+float bank::maxbalance=0.0;
 int main(){
      bank b1;
      cout<<"\nTotal Onject: "<<b1.gettotal()<<endl;
      b1.show();
-     bank b2(1,1000);
+     bank b2(1,500);
      cout<<"\nTotal Onject: "<<b2.gettotal()<<endl;
      b2.show();
     bank b3 = b2; 

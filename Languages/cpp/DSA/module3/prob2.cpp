@@ -14,7 +14,7 @@ int main() {
             }
         }
     }
-    cout<<"number yuo want to find:"<<endl;
+    cout<<"number you want to find:"<<endl;
     cin>>m;
     int k,loc=-1;
     for(k=0;k<n;k++){
