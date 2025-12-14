@@ -6,7 +6,7 @@ import google.generativeai as genai
 genai.configure(api_key="insert api")
 
 # Initialize the model
-model = genai.GenerativeModel('gemini-2.5-flash')
+model = genai.GenerativeModel('gemini-pro')
 
 def generate_scenario(context, player_action=None):
     """Generate a D&D-style scenario using Gemini AI as the DM."""

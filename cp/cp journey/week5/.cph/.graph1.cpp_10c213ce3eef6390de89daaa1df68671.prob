@@ -1,0 +1,1 @@
+{"name":"Local: graph1","url":"/Users/sazzad/development/github/CODING_ALL/cp/cp journey/week5/graph1.cpp","tests":[{"id":1765633653466,"input":"5 4\n1 2\n2 3\n1 4\n2 5\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/sazzad/development/github/CODING_ALL/cp/cp journey/week5/graph1.cpp","group":"local","local":true}

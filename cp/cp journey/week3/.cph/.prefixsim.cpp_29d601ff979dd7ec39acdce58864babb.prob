@@ -1,0 +1,1 @@
+{"name":"Local: prefixsim","url":"/Users/sazzad/development/github/CODING_ALL/cp/cp journey/week3/prefixsim.cpp","tests":[{"id":1765036319940,"input":"5\n2 3 1 5 4\n","output":"2 5 6 11 15\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/sazzad/development/github/CODING_ALL/cp/cp journey/week3/prefixsim.cpp","group":"local","local":true}
