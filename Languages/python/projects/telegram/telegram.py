@@ -1,8 +1,8 @@
 import requests
 import time
 
-BOT_TOKEN = "8565679031:AAFGOe63dZ-u5FU-VlkWzs6XhrD4pbTmVvY"
-CHAT_ID = "7075065660"
+BOT_TOKEN = "token"
+CHAT_ID = "id"
 
 def send_photo(photo_path):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto"
